@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list>
+    <item>
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="oval">
+            <size
+                android:width="70dp"
+                android:height="70dp">
+            </size>
+
+            <solid
+                android:color="@color/colorAccent">
+            </solid>
+        </shape>
+    </item>
+
+    <item>
+        <bitmap
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:gravity="center"
+            android:src="@drawable/play_ico">
+        </bitmap>
+    </item>
+</layer-list>
+
+
