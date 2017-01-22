@@ -24,14 +24,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
 
-        mainFragment = (MainFragment) getLastCustomNonConfigurationInstance();
-        if(mainFragment == null){
+        if (getSupportFragmentManager().getFragments() != null && !getSupportFragmentManager().getFragments().isEmpty()) {
+            mainFragment = (MainFragment) getSupportFragmentManager().getFragments().get(0);
+        } else {
             mainFragment = new MainFragment();
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.conteiner, mainFragment)
+                    .commit();
         }
-        ft.replace(R.id.conteiner, mainFragment);
-        ft.commit();
     }
 
     @Override
@@ -49,10 +51,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(settingsIntent);
 
         return super.onOptionsItemSelected(menuItem);
-    }
-
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return mainFragment;
     }
 }
