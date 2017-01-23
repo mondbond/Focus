@@ -49,7 +49,6 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
 
         presenter.checkFirstStart();
 
-        presenter.beforeStart();
     }
 
     @Override
@@ -81,7 +80,7 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
             }});
 
         timerPB = (ProgressBar) v.findViewById(R.id.timerProgressBar);
-
+        presenter.beforeStart();
         return v;
     }
 

@@ -60,7 +60,6 @@ public class MainScreenPresenter implements MainScreenContract.Presenter, Timer.
 
     public void beforeStart() {
         timer.resgisterCallback(this);
-        ticker = 0;
         int time;
         int count = sharedPreferences.getInt(SettingsActivity.COUNT_BREAK, 0);
         if(work) {
@@ -71,8 +70,13 @@ public class MainScreenPresenter implements MainScreenContract.Presenter, Timer.
             time = sharedPreferences.getInt(SettingsActivity.BREAK, 0);
         }
 
+        if(!status.equals(STATUS_WORK))
+        {
+            sec = 60;
+            ticker = 0;
+        }
+
         min = time - 1;
-        sec = 60;
         view.initiate(min, sec);
         timer.setSeconds(time*60000);
     }
