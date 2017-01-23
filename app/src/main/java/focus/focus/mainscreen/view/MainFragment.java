@@ -1,6 +1,7 @@
 package focus.focus.mainscreen.view;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,12 +37,9 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
 
     public MainFragment() {}
 
-     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        setRetainInstance(true);
-
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         component = DaggerMainScreenComponent.builder()
                 .appComponent(((App) getActivity().getApplicationContext()).getAppComponent())
@@ -50,6 +48,16 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
         component.inject(this);
 
         presenter.checkFirstStart();
+
+        presenter.beforeStart();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setRetainInstance(true);
+
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         minutesTv = (TextView) v.findViewById(R.id.minutesTimer);
         secondsTv = (TextView) v.findViewById(R.id.secoundsTimer);
@@ -74,8 +82,6 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
 
         timerPB = (ProgressBar) v.findViewById(R.id.timerProgressBar);
 
-        presenter.beforeStart();
-
         return v;
     }
 
@@ -98,8 +104,5 @@ public class MainFragment extends Fragment implements MainScreenContract.View {
     public void setCount(int count)
     {
         countTv.setText(Integer.toString(count));
-    }
-
-    public void setRetainInstance(boolean retain) {
     }
 }

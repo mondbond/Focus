@@ -6,7 +6,7 @@
     <string name="notification_title_rest">Rest</string>
     <string name="notification_title_work">Work</string>
 
-    <string name="notification_text_work">Ok, let's work</string>
+    <string name="notification_text_work">Ok, let\'s work</string>
     <string name="notification_text_rest">Good job, have a rest</string>
 
     <!-- Strings related to Settings -->
